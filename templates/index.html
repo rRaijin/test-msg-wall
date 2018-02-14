@@ -1,1 +1,12 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    <p>
+        {% if user and not user.is_anonymous %}
+            <a href="{% url 'wall:logout' %}">logout</a> {{ user.username }}
+        {% else %}
+            <a href="{% url 'social:begin' 'google-oauth2' %}">Google+</a>
+        {% endif %}
+    </p>
+
+{% endblock %}
