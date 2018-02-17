@@ -1,0 +1,22 @@
+{% load static %}
+
+
+{% for comment in comments %}
+    <div class="comment_div">
+        <div class="comment-wrapper">
+            <a href="{% url 'wall:edit-comment' id=comment.id %}" class="edit">edit</a>
+            <p style="margin-left: 20px; color: red" data-comment_id="{{ comment.id }}" class="comment-text">
+                {{ comment.body }}
+            </p>
+{#            <span style="display: block">{{ comment.id }}</span>#}
+            <span class='comment-author'>{{ comment.author }}</span>
+            <span class='comment-date' data-url="{% url 'wall:add-comment' id=msg.id pk=comment.id %}">{{ comment.posted }}</span>
+            <a class="reply">reply</a>
+        </div>
+        <div class="all-comments">
+            {% if comment.children.all %}
+                {% include 'wall/comment.html' with comments=comment.children.all %}
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
