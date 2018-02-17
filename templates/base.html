@@ -9,9 +9,7 @@
         <title>
             {% block title %}{% endblock title %}
         </title>
-{#        <link rel="stylesheet" href="{% static 'components/bootstrap/bootstrap-3.3.7.min.css' %}">#}
-{#        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400">#}
-{#        <link rel="stylesheet" href="{% static 'components/bxslider/jquery.bxslider.min.css' %}">#}
+        <link rel="stylesheet" href="{% static 'libs/bootstrap/bootstrap-3.3.7.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <!-- FONTS -->
 {#        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Bitter|Josefin+Sans|Quattrocento|Abril+Fatface" rel="stylesheet">#}
@@ -25,8 +23,8 @@
     </head>
 
     <body>
-{#        <form id="csrf_getting_form" action="" class="hidden">{% csrf_token %}</form>#}
         <header>
+
         </header>
 
         {% block content %}
@@ -37,17 +35,7 @@
         </footer>
 
         <script src="{% static 'libs/jquery-3.2.1.js' %}"></script>
-{#        <script src="{% static 'components/jquery-ui.min.js' %}"></script>#}
-{#        <script src="{% static 'components/jquery.easytabs.min.js' %}"></script>#}
-{#        <script src="{% static 'components/bxslider/jquery.bxslider.min.js' %}"></script>#}
-{#        <script src="{% static 'components/bootstrap/bootstrap-3.3.7.min.js' %}"></script>#}
+        <script src="{% static 'libs/bootstrap/bootstrap-3.3.7.min.js' %}"></script>
         <script src="{% static 'main.js' %}"></script>
-{#        <script type="text/javascript">#}
-{#            function refreshPage () {#}
-{#                    var page_y = document.getElementsByTagName("body")[0].scrollTop;#}
-{#                    window.location.href = window.location.href.split('?')[0] + '?page_y=' + page_y;#}
-{#                };#}
-{#            var cart_add_url = "{% url "cart:cart_add" product.id %}";#}
-{#        </script>#}
     </body>
 </html>

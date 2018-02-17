@@ -1,0 +1,199 @@
+/*В этом файле находятся все стили, импортируется только normalize, все цвета и шрифты также указаны тут*/
+
+@import "../libs/normalize"
+
+/***************COLORS*************/
+$login-div-bgc: #FAEBD7 /**/
+$login-a-bgc: #94a6f7
+$login-a-color: #fff
+$login-p-color: #717980
+$msg-form-add-bgc: #fffcad
+$msg-form-edit-bgc: #f3baef
+$com-form-bgc: #C5FFB4
+$comment-wrapper-bgc: #d5e0ff
+$edit-link-color: #FF0000
+$edit-link-hover-color: #0000FF
+$edit-link-active-color: #FFFF00
+$msg-body-bgc: #e2d5e2
+$msg-text-color: #292121
+$msg-first-letter: #5fd82f
+$msg-author-color: #7165d2
+$date-color: #7c8790
+$comment-color: #360ada
+
+
+.container
+  margin-top: 20px
+
+.message-container
+  background-color: #e4ece2
+
+a:hover
+  text-decoration: none
+
+/*******Стили для блока логина
+.login
+  background-color: $login-div-bgc
+  border-radius: 15px
+  border: 1px solid
+  margin: 0 auto
+  width: 50%
+
+  a
+    background-color: $login-a-bgc
+    color: $login-a-color
+    display: block
+    font-weight: 800
+    font-size: 18px
+    margin: 0 auto
+    margin-top: 10px
+    width: 20%
+
+  p
+    color: $login-p-color
+    font-weight: 600
+    font-size: 16px
+    text-align: center
+    margin-top: 5px
+
+/*********Стили для формы добавления и редактирования сообщений
+.message_form, .edit_message_form
+  background-color: $msg-form-add-bgc
+  border: 1px solid
+  display: block
+  margin: 0 auto
+  width: 50%
+
+  p
+    display: inline-block
+    margin: 0
+    width: 75%
+
+    label
+      display: none
+
+    textarea
+      float: left
+      height: 80px
+      margin: 5px 0 0 5px
+      width: 100%
+
+  .submit-msg-button
+    float: right
+    height: 45px
+    margin: 25px 20px 0 0
+
+.edit_message_form
+  background-color: $msg-form-edit-bgc
+  width: 100%
+
+  p
+    width: 70%
+
+/*******Стили для формы добавления/редактирования комментариев
+.comment_form, .add_comment_form
+  background-color: $com-form-bgc
+  border: 1px solid
+  display: block
+
+  .comment_text
+    display: inline-block
+    margin: 0
+    padding: 5px
+    width: 77%
+
+    input
+      width: 100%
+
+    label
+      display: none
+
+  .submit-comment-button
+    width: 18%
+    margin-left: 1%
+
+/********Контейнер для сообщения, включая комментарии
+.message-wrapper
+  margin: 10px 0
+  overflow: hidden
+  padding: 10px
+  position: relative
+
+/********Контейнер для комментария
+.comment-wrapper
+  background-color: $comment-wrapper-bgc
+  border-radius: 5px
+  display: inline-block
+  margin: 5px 0
+  padding: 7px
+
+
+.edit-comment, .edit-message
+  color: $edit-link-color
+  cursor: pointer
+  font-size: 12px
+  text-decoration: none
+
+  &:hover
+    color: $edit-link-hover-color
+
+  &:active
+    border: none
+    color: $edit-link-active-color
+
+/*********Сам блок сообщения
+.message-body
+  background-color: $msg-body-bgc
+  clear: both
+  float: left
+  margin-bottom: 10px
+  padding: 10px
+
+/*********Текст сообщения/комментария
+.msg-body, .comment-text
+  color: $msg-text-color
+  font-size: 18px
+  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace
+  margin: 5px 0 10px 15px
+  text-align: justify
+
+  &:first-letter
+    color: $msg-first-letter
+    font-weight: 600
+    font-size: 30px
+    text-transform: uppercase
+
+/*********Автор
+.message-author, .comment-author
+  color: $msg-author-color
+  display: inline-block
+  font-size: 18px
+  font-family: "sans-serif"
+  margin: 0 5px
+
+  &:first-letter
+    text-transform: uppercase
+
+.message-date, .comment-date
+  color: $date-color
+  font-size: 14px
+
+.comment, .reply
+  cursor: pointer
+  color: $comment-color
+  float: right
+  margin-left: 30px
+
+  &:hover
+    color: $edit-link-color
+
+/********Контейнер комментария, вместе с вложенными комментариями
+.comment_div
+  border-radius: 5px
+  display: block
+
+/********Вложенные комментарии
+.all-comments
+  clear: both
+  display: block
+  margin-left: 30px

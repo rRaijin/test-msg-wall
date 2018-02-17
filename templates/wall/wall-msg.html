@@ -1,63 +1,86 @@
 {% extends 'base.html' %}
+
 {% load comment_filter %}
 
 {% block content %}
-    <p>
-        {% if user and not user.is_anonymous %}
-            Hello {{ user.username }}
+    <div class="container">
+        <form action="" method="POST" style="display: none" class="comment_form">
+            {% csrf_token %}
+            <p class="comment_text">{{ AddCommentForm }}</p>
+            <input type="submit" class="submit-comment-button">
+        </form><!-- Форма для комментариев, не отображается -->
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'wall:add-message' %}" method="POST" style="display: block" class="message_form">
+                {% csrf_token %}
+                <p class="comment_text">{{ AddMessageForm }}</p>
+                <input type="submit" class="submit-msg-button">
+            </form><!-- Форма добавления сообщения -->
         {% else %}
-            asd
-        {% endif %}
-    </p>
-
-    <!-- Форма для комментариев, не отображается -->
-    <form action="" method="POST" style="display: none" class="comment_form">
-        {% csrf_token %}
-        <p class="comment_text">{{ AddCommentForm }}</p>
-        <input type="submit" class="btn">
-    </form>
-
-    <form action="{% url 'wall:add-message' %}" method="POST" style="display: block" class="message_form">
-        {% csrf_token %}
-        <p class="comment_text">{{ AddMessageForm }}</p>
-        <input type="submit" class="btn">
-    </form>
-    <div class="message-container">
-        {% for msg in messages %}
-            <div class="message-wrapper">
-                <div>
-                    <a href="{% url 'wall:edit-message' id=msg.id %}" class="redit">edit</a>
-                    <p class="msg-body">{{ msg.body }}</p>
-                    <span class='message-author'>{{ msg.author }}</span>
-                    <span class='message-date' data-url="{% url 'wall:add-comment' id=msg.id pk=0 %}">{{ msg.date }}</span>
-                    <a class="comment">comment</a>
-                </div>
-                {% if msg.comments.all %}
-                    <div class="all-comments"> <!-- Контейнер для всех комментариев к сообщению -->
-                        {% for comment in msg.comments|parent_filter %} <!-- Фильтр для выборки комментариев верхнего уровня -->
-                            <div class="comment_div"> <!-- Контейнер для каждого комментария, включая дочерние -->
-                                <div class="comment-wrapper">
-                                    <a href="{% url 'wall:edit-comment' id=comment.id %}" class="edit">edit</a>
-                                    <p style="margin-left: 20px; color: red" data-comment_id="{{ comment.id }}" class="comment-text">
-                                        {{ comment.body }}
-                                    </p>
-                                    <span class='comment-author'>{{ comment.author }}</span>
-                                    <span class='comment-date' data-url="{% url 'wall:add-comment' id=msg.id pk=comment.id %}">{{ comment.posted }}</span>
-
-                                    <a class="reply">reply</a>
-                                </div>
-                                <div class="all-comments">
-                                {% if comment.children.all %}
-                                    {% include 'wall/comment.html' with comments=comment.children.all %}
-                                {% endif %}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <div class="comment-wrapper"><p class="void-class">clear</p></div>
-                {% endif %}
+            <div class="login">
+                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-default">Google+</a>
+                <p>Для добавления и комментирования сообщений выполните вход</p>
             </div>
-        {% endfor %}
+        {% endif %}
+        <div class="message-container">
+            {% for msg in messages %}
+                <div class="message-wrapper">
+                    <div class="message-body">
+                        {% if request.user == msg.author %}
+                            <a href="{% url 'wall:edit-message' id=msg.id %}" class="edit-message">
+                                редактировать сообщение
+                            </a><!-- ссылка для редактирования автором или модератором -->
+                        {% endif %}
+                        <p class="msg-body">{{ msg.body }}</p>
+                        {% if msg.posted == msg.edited %}
+                            Опубликовано
+                        {% else %}
+                            Отредактировано
+                        {% endif %}
+                        <span class='message-author'>{{ msg.author }}</span>
+                        <!-- data-url используется ajax для создания комментария при клике на ссылку "комментировать" ниже -->
+                        <span class='message-date' data-url="{% url 'wall:add-comment' id=msg.id pk=0 %}">{{ msg.posted }}</span>
+                        {% if request.user.is_authenticated %}
+                            <a class="comment">комментировать</a>
+                        {% endif %}
+                    </div><!-- Блок сообщения, без комментариев -->
+                    <div class="all-comments">
+                        {% if msg.comments.all %}
+                            {% for comment in msg.comments|parent_filter %}<!-- Фильтр для выборки комментариев верхнего уровня -->
+                                <div class="comment_div">
+                                    <div class="comment-wrapper">
+                                        {% if request.user == comment.author or request.user.is_staff %}
+                                            <a href="{% url 'wall:edit-comment' id=comment.id %}" class="edit-comment">
+                                                редактировать комментарий
+                                            </a>
+                                        {% endif %}
+                                        <p data-comment_id="{{ comment.id }}" class="comment-text">{{ comment.body }}</p>
+                                        {% if comment.posted == comment.edited %}
+                                            Комментарий оставлен
+                                        {% else %}
+                                            Комментарий отредактирован
+                                        {% endif %}
+                                        <span class='comment-author'>{{ comment.author }}</span>
+                                        <!-- data-url используется ajax для создания комментария при клике на ссылку "комментировать" ниже -->
+                                        <span class='comment-date' data-url="{% url 'wall:add-comment' id=msg.id pk=comment.id %}">
+                                            {{ comment.posted }}
+                                        </span>
+                                        {% if request.user.is_authenticated %}
+                                            <a class="reply">комментировать</a>
+                                        {% endif %}
+                                    </div><!-- Блок комментария -->
+                                    <div class="all-comments">
+                                        {% if comment.children.all %}
+                                            {% include 'wall/comment.html' with comments=comment.children.all %}
+                                        {% endif %}
+                                    </div><!-- Контейнер для дочерних комментариев -->
+                                </div><!-- Контейнер для каждого комментария, включая дочерние -->
+                            {% endfor %}
+                        {% else %}
+                            <p class="void-class">Тут пока нет комментариев</p>
+                        {% endif %}
+                    </div><!-- Контейнер для всех комментариев к сообщению -->
+                </div><!-- Контейнер сообщения, включая его комментарии -->
+            {% endfor %}
+        </div><!-- Контейнер для всех сообщений -->
     </div>
 {% endblock content %}

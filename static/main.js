@@ -1,96 +1,72 @@
 $(document).ready(function () {
 
+    /*Скрипт добавления сообщения на стену*/
     $('.message_form').on('submit', function (e) {
         e.preventDefault();
         var form = $(this);
-        console.log(form);
-        $.post(form.attr('action'), form.serialize()).done(function (data) {
-            console.log(data);
-            $('.message-container').prepend(
+        $.post(form.attr('action'), form.serialize()).done(function (data) { /*ajax-запрос для добавления сообщения*/
+            $('.message-container').prepend( /*Новые сообщения добавляются сверху*/
                 "<div class='message-wrapper'>" +
-                    "<div>" +
-                        "<a class='redit'"+"href='"+data.update_url+"'>"+"edit"+"</a>"+
-                        "<p class='msg-body'>" + data.body + "</p>" +
-                        "<span class='message-author'>" + data.author + "</span>" +
-                        "<span class='message-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
-                        "<a class='comment'>comment</a>" +
-                    "</div>" +
-                    "<div class='all-comments'>" +
-                    "</div>" +
+                    "<div class='message-body'>" +
+                    "<a class='edit-message'"+"href='"+data.update_url+"'>редактировать сообщение</a>"+
+                    "<p class='msg-body'>" + data.body + "</p>" + "Сообщение опубликовано" +
+                    "<span class='message-author'>" + data.author + "</span>" +
+                    "<span class='message-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
+                    "<a class='reply'>комментировать</a>" +
+                    "</div>" + "<div class='all-comments'></div>" +
                 "</div>"
             );
         });
-        form.find("textarea").val('');
+        form.find("textarea").val(''); /*Чистим форму после добавления сообщения*/
     });
 
-    $(document).on('click', '.redit', function(e) {
+    /*Скрипт для получения формы сообщения для редактирования*/
+    $(document).on('click', '.edit-message', function(e) {
         e.preventDefault();
-
-        var edited_obj = $(this).parent();
-
-        console.log(edited_obj);
-        var val_for_edit = edited_obj.find('p').first().text();
-        console.log(val_for_edit);
-        console.log(this);
-        var action = $(this).attr('href'),
-            clone = $('.message_form').clone().attr('action', action).css('display', 'block');
-        console.log(action);
+        var edited_obj = $(this).parent(),
+            val_for_edit = edited_obj.find('p').first().text(), /*Получаю начальное значение редактируемого сообщения для вставки в форму*/
+            action = $(this).attr('href'),
+            clone = $('.message_form').clone().attr('action', action).css('display', 'block'); /*Клонирую форму добавления сообщения*/
 
         $(this).after(clone);
-        clone.addClass('add_comment_form').removeClass('message_form');
-        $('.add_comment_form p textarea').val(val_for_edit);
-        clone.attr('onclick', editcomment());
+        clone.addClass('edit_message_form').removeClass('message_form');
+        $('.edit_message_form p textarea').val(val_for_edit);
+        clone.attr('onclick', editmessage()); /*Привязываю к измененному(новому) объекту событие*/
     });
 
-    $(document).on('click','.comment, .reply', function(e) {
-        var $action = $(this).prev(),
-            action = $action.attr('data-url'),
-            clone = $('.comment_form').clone().attr('action', action).css('display', 'block');
-        console.log(action);
-
-        $(this).after(clone);
-
-        clone.addClass('add_comment_form').removeClass('comment_form');
-        clone.attr('onclick', comment());
-    });
-
-    $(document).on('click', '.edit', function(e) {
-        e.preventDefault();
-
-        var edited_obj = $(this).parent();
-
-        console.log(edited_obj);
-        var val_for_edit = edited_obj.find('p').first().text();
-        console.log(val_for_edit);
-        var action = $(this).attr('href'),
-            clone = $('.comment_form').clone().attr('action', action).css('display', 'block');
-
-        $(this).after(clone);
-        clone.addClass('add_comment_form').removeClass('comment_form');
-        $('.add_comment_form p input').val(val_for_edit);
-        clone.attr('onclick', editcomment());
-    });
-
-    function editcomment() {
-        $('.add_comment_form').on('submit', function (e) {
+    /*Функция для редактирования сообщения*/
+    function editmessage() {
+        $('.edit_message_form').on('submit', function (e) {
             e.preventDefault();
             var form = $(this);
             $.post(form.attr('action'), form.serialize()).done(function (data) {
-                form.parent().replaceWith(
-                    "<div class='comment_wrapper'>" +
-                    "<a class='edit'"+"href='"+data.update_url+"'>"+"edit"+"</a>"+
-                    "<p class='comment-text'>" + data.body + "</p>" +
-                    "<span class='comment-author'>" + data.author + "</span>" +
-                    "<span class='comment-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
-                    "<a class='reply'>reply</a>"+
-                    "</div>"
+                form.parent().replaceWith(/*Заменяю редактриуемые данные на новые*/
+                    "<div class='message-body'>" +
+                    "<a class='edit-message'"+"href='"+data.update_url+"'>редактировать сообщение</a>"+
+                    "<p class='msg-body'>" + data.body + "</p>" + "Сообщение отредактировано" +
+                    "<span class='message-author'>" + data.author + "</span>" +
+                    "<span class='message-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
+                    "<a class='reply'>комментировать</a>" +
+                    "</div>" + "<div class='all-comments'></div>"
                 );
                 $('.void-class').remove();
-                form.remove();
+                form.remove();/*Удаляю форму*/
             });
         });
     }
 
+    /*Скрипт для клонирования формы для добавления комментария*/
+    $(document).on('click','.comment, .reply', function(e) {
+        var $action = $(this).prev(),
+            action = $action.attr('data-url'),
+            clone = $('.comment_form').clone().attr('action', action).css('display', 'block');
+
+        $(this).after(clone);
+        clone.addClass('add_comment_form').removeClass('comment_form');
+        clone.attr('onclick', comment());
+    });
+
+    /*Функция для добавления комментария*/
     function comment() {
         $('.add_comment_form').on('submit', function (e) {
             e.preventDefault();
@@ -98,17 +74,52 @@ $(document).ready(function () {
             $.post(form.attr('action'), form.serialize()).done(function (data) {
                 form.parent().next().append(
                     "<div class='comment_div'>" +
-                    "<div class='comment_wrapper'>" +
-                    "<a class='edit'"+"href='"+data.update_url+"'>"+"edit"+"</a>"+
-                    "<p class='comment-text'>" + data.body + "</p>" +
+                    "<div class='comment-wrapper'>" +
+                    "<a class='edit-comment'"+"href='"+data.update_url+"'>редактировать комментарий</a>"+
+                    "<p class='comment-text'>" + data.body + "</p>" + "Комментарий оставлен" +
                     "<span class='comment-author'>" + data.author + "</span>" +
                     "<span class='comment-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
-                    "<a class='reply'>reply</a>"+
+                    "<a class='reply'>комментировать</a>"+
                     "</div>" + "<div class='all-comments'>" + "</div>" +
                     "</div>"
                 );
                 $('.void-class').remove();
-                form.remove();
+                form.remove();/*Удаляю форму*/
+            });
+        });
+    }
+
+    /*Скрипт для получения формы комментария для редактирования*/
+    $(document).on('click', '.edit-comment', function(e) {
+        e.preventDefault();
+        var edited_obj = $(this).parent(),
+            val_for_edit = edited_obj.find('p').first().text(),/*Получаю начальное значение редактируемого сообщения для вставки в форму*/
+            action = $(this).attr('href'),
+            clone = $('.comment_form').clone().attr('action', action).css('display', 'block');/*Клонирую форму добавления комментария*/
+
+        $(this).after(clone);
+        clone.addClass('add_comment_form').removeClass('comment_form');
+        $('.add_comment_form p input').val(val_for_edit);
+        clone.attr('onclick', editcomment()); /*Привязываю к измененному(новому) объекту событие*/
+    });
+
+    /*Функция для редактирования комментария*/
+    function editcomment() {
+        $('.add_comment_form').on('submit', function (e) {
+            e.preventDefault();
+            var form = $(this);
+            $.post(form.attr('action'), form.serialize()).done(function (data) {
+                form.parent().replaceWith( /*Заменяю редактриуемые данные на новые*/
+                    "<div class='comment-wrapper'>" +
+                    "<a class='edit-comment'"+"href='"+data.update_url+"'>редактировать комментарий</a>"+
+                    "<p class='comment-text'>" + data.body + "</p>" + "Комментарий отредактирован" +
+                    "<span class='comment-author'>" + data.author + "</span>" +
+                    "<span class='comment-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
+                    "<a class='reply'>комментировать</a>"+
+                    "</div>"
+                );
+                $('.void-class').remove();
+                form.remove();/*Удаляю форму*/
             });
         });
     }

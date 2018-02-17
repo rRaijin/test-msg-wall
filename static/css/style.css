@@ -1,0 +1,382 @@
+@charset "UTF-8";
+/*╨Т ╤Н╤В╨╛╨╝ ╤Д╨░╨╣╨╗╨╡ ╨╜╨░╤Е╨╛╨┤╤П╤В╤Б╤П ╨▓╤Б╨╡ ╤Б╤В╨╕╨╗╨╕, ╨╕╨╝╨┐╨╛╤А╤В╨╕╤А╤Г╨╡╤В╤Б╤П ╤В╨╛╨╗╤М╨║╨╛ normalize, ╨▓╤Б╨╡ ╤Ж╨▓╨╡╤В╨░ ╨╕ ╤И╤А╨╕╤Д╤В╤Л ╤В╨░╨║╨╢╨╡ ╤Г╨║╨░╨╖╨░╨╜╤Л ╤В╤Г╤В */
+/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ */
+/* Document ========================================================================== */
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block; }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+figcaption,
+figure,
+main {
+  display: block; }
+
+figure {
+  margin: 1em 40px; }
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible; }
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects; }
+
+a:active,
+a:hover {
+  outline-width: 0; }
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted; }
+
+b,
+strong {
+  font-weight: inherit; }
+
+b,
+strong {
+  font-weight: bolder; }
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+dfn {
+  font-style: italic; }
+
+mark {
+  background-color: #ff0;
+  color: #000; }
+
+small {
+  font-size: 80%; }
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sub {
+  bottom: -0.25em; }
+
+sup {
+  top: -0.5em; }
+
+audio,
+video {
+  display: inline-block; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+img {
+  border-style: none; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0; }
+
+button,
+input {
+  overflow: visible; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; }
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0; }
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal; }
+
+/*1. Add the correct display in IE 9-. 2. Add the correct vertical alignment in Chrome, Firefox, and Opera. */
+progress {
+  display: inline-block;
+  vertical-align: baseline; }
+
+/*Remove the default vertical scrollbar in IE. */
+textarea {
+  overflow: auto; }
+
+/*1. Add the correct box sizing in IE 10-. 2. Remove the padding in IE 10-. */
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0; }
+
+/*Correct the cursor style of increment and decrement buttons in Chrome. */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/* 1. Correct the odd appearance in Chrome and Safari. 2. Correct the outline style in Safari. */
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px; }
+
+/*Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/*1. Correct the inability to style clickable types in iOS and Safari. 2. Change font properties to `inherit` in Safari. */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit; }
+
+/* Interactive ========================================================================== */
+/*Add the correct display in IE 9-. 1. Add the correct display in Edge, IE, and Firefox. */
+details,
+menu {
+  display: block; }
+
+/*Add the correct display in all browsers. */
+summary {
+  display: list-item; }
+
+/* Scripting ========================================================================== */
+/*Add the correct display in IE 9-. */
+canvas {
+  display: inline-block; }
+
+/*Add the correct display in IE. */
+template {
+  display: none; }
+
+/* Hidden ========================================================================== */
+/*Add the correct display in IE 10-. */
+[hidden] {
+  display: none; }
+
+/***************COLORS************ */
+.container {
+  margin-top: 20px; }
+
+.message-container {
+  background-color: #e4ece2; }
+
+a:hover {
+  text-decoration: none; }
+
+/*******╨б╤В╨╕╨╗╨╕ ╨┤╨╗╤П ╨▒╨╗╨╛╨║╨░ ╨╗╨╛╨│╨╕╨╜╨░ */
+.login {
+  background-color: #FAEBD7;
+  border-radius: 15px;
+  border: 1px solid;
+  margin: 0 auto;
+  width: 50%; }
+  .login a {
+    background-color: #94a6f7;
+    color: #fff;
+    display: block;
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 20%; }
+  .login p {
+    color: #717980;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 5px; }
+
+/*********╨б╤В╨╕╨╗╨╕ ╨┤╨╗╤П ╤Д╨╛╤А╨╝╤Л ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╤П ╨╕ ╤А╨╡╨┤╨░╨║╤В╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╨╣ */
+.message_form, .edit_message_form {
+  background-color: #fffcad;
+  border: 1px solid;
+  display: block;
+  margin: 0 auto;
+  width: 50%; }
+  .message_form p, .edit_message_form p {
+    display: inline-block;
+    margin: 0;
+    width: 75%; }
+    .message_form p label, .edit_message_form p label {
+      display: none; }
+    .message_form p textarea, .edit_message_form p textarea {
+      float: left;
+      height: 80px;
+      margin: 5px 0 0 5px;
+      width: 100%; }
+  .message_form .submit-msg-button, .edit_message_form .submit-msg-button {
+    float: right;
+    height: 45px;
+    margin: 25px 20px 0 0; }
+
+.edit_message_form {
+  background-color: #f3baef;
+  width: 100%; }
+  .edit_message_form p {
+    width: 70%; }
+
+/*******╨б╤В╨╕╨╗╨╕ ╨┤╨╗╤П ╤Д╨╛╤А╨╝╤Л ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╤П/╤А╨╡╨┤╨░╨║╤В╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╨╡╨▓ */
+.comment_form, .add_comment_form {
+  background-color: #C5FFB4;
+  border: 1px solid;
+  display: block; }
+  .comment_form .comment_text, .add_comment_form .comment_text {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    width: 77%; }
+    .comment_form .comment_text input, .add_comment_form .comment_text input {
+      width: 100%; }
+    .comment_form .comment_text label, .add_comment_form .comment_text label {
+      display: none; }
+  .comment_form .submit-comment-button, .add_comment_form .submit-comment-button {
+    width: 18%;
+    margin-left: 1%; }
+
+/********╨Ъ╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А ╨┤╨╗╤П ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П, ╨▓╨║╨╗╤О╤З╨░╤П ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╨╕ */
+.message-wrapper {
+  margin: 10px 0;
+  overflow: hidden;
+  padding: 10px;
+  position: relative; }
+
+/********╨Ъ╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А ╨┤╨╗╤П ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╤П */
+.comment-wrapper {
+  background-color: #d5e0ff;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px 0;
+  padding: 7px; }
+
+.edit-comment, .edit-message {
+  color: #FF0000;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: none; }
+  .edit-comment:hover, .edit-message:hover {
+    color: #0000FF; }
+  .edit-comment:active, .edit-message:active {
+    border: none;
+    color: #FFFF00; }
+
+/*********╨б╨░╨╝ ╨▒╨╗╨╛╨║ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П */
+.message-body {
+  background-color: #e2d5e2;
+  clear: both;
+  float: left;
+  margin-bottom: 10px;
+  padding: 10px; }
+
+/*********╨в╨╡╨║╤Б╤В ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П/╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╤П */
+.msg-body, .comment-text {
+  color: #292121;
+  font-size: 18px;
+  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+  margin: 5px 0 10px 15px;
+  text-align: justify; }
+  .msg-body:first-letter, .comment-text:first-letter {
+    color: #5fd82f;
+    font-weight: 600;
+    font-size: 30px;
+    text-transform: uppercase; }
+
+/*********╨Р╨▓╤В╨╛╤А */
+.message-author, .comment-author {
+  color: #7165d2;
+  display: inline-block;
+  font-size: 18px;
+  font-family: "sans-serif";
+  margin: 0 5px; }
+  .message-author:first-letter, .comment-author:first-letter {
+    text-transform: uppercase; }
+
+.message-date, .comment-date {
+  color: #7c8790;
+  font-size: 14px; }
+
+.comment, .reply {
+  cursor: pointer;
+  color: #360ada;
+  float: right;
+  margin-left: 30px; }
+  .comment:hover, .reply:hover {
+    color: #FF0000; }
+
+/********╨Ъ╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╤П, ╨▓╨╝╨╡╤Б╤В╨╡ ╤Б ╨▓╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╝╨╕ ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╤П╨╝╨╕ */
+.comment_div {
+  border-radius: 5px;
+  display: block; }
+
+/********╨Т╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╡ ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╨╕ */
+.all-comments {
+  clear: both;
+  display: block;
+  margin-left: 30px; }
+
+/*# sourceMappingURL=style.css.map */
