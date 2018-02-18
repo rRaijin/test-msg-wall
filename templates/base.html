@@ -11,9 +11,6 @@
         </title>
         <link rel="stylesheet" href="{% static 'libs/bootstrap/bootstrap-3.3.7.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <!-- FONTS -->
-{#        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Bitter|Josefin+Sans|Quattrocento|Abril+Fatface" rel="stylesheet">#}
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -24,7 +21,6 @@
 
     <body>
         <header>
-
         </header>
 
         {% block content %}
@@ -35,7 +31,20 @@
         </footer>
 
         <script src="{% static 'libs/jquery-3.2.1.js' %}"></script>
+        <script src="{% static 'libs/waypoints/lib/jquery.waypoints.js' %}"></script>
+        <script src="{% static 'libs/waypoints/src/shortcuts/infinite.js' %}"></script>
         <script src="{% static 'libs/bootstrap/bootstrap-3.3.7.min.js' %}"></script>
         <script src="{% static 'main.js' %}"></script>
+        <script>
+            var infinite = new Waypoint.Infinite({
+              element: $('.infinite-container')[0],
+              onBeforePageLoad: function () {
+                $('.loading').show();
+              },
+              onAfterPageLoad: function ($items) {
+                $('.loading').hide();
+              }
+            });
+        </script>
     </body>
 </html>

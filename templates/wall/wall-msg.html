@@ -3,14 +3,14 @@
 {% load comment_filter %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" id="app">
         <form action="" method="POST" style="display: none" class="comment_form">
             {% csrf_token %}
             <p class="comment_text">{{ AddCommentForm }}</p>
             <input type="submit" class="submit-comment-button">
         </form><!-- Форма для комментариев, не отображается -->
         {% if request.user.is_authenticated %}
-            <form action="{% url 'wall:add-message' %}" method="POST" style="display: block" class="message_form">
+            <form action="{% url 'wall:add-message' %}" method="POST" class="message_form">
                 {% csrf_token %}
                 <p class="comment_text">{{ AddMessageForm }}</p>
                 <input type="submit" class="submit-msg-button">
@@ -21,11 +21,11 @@
                 <p>Для добавления и комментирования сообщений выполните вход</p>
             </div>
         {% endif %}
-        <div class="message-container">
+        <div class="message-container infinite-container">
             {% for msg in messages %}
-                <div class="message-wrapper">
+                <div class="message-wrapper infinite-item">
                     <div class="message-body">
-                        {% if request.user == msg.author %}
+                        {% if request.user == msg.author or request.user.is_staff %}
                             <a href="{% url 'wall:edit-message' id=msg.id %}" class="edit-message">
                                 редактировать сообщение
                             </a><!-- ссылка для редактирования автором или модератором -->
@@ -38,9 +38,14 @@
                         {% endif %}
                         <span class='message-author'>{{ msg.author }}</span>
                         <!-- data-url используется ajax для создания комментария при клике на ссылку "комментировать" ниже -->
-                        <span class='message-date' data-url="{% url 'wall:add-comment' id=msg.id pk=0 %}">{{ msg.posted }}</span>
+                        <span class='message-date' data-url="{% url 'wall:add-comment' id=msg.id pk=0 %}">{{ msg.posted | date:'Y-m-d H:i' }}</span>
                         {% if request.user.is_authenticated %}
                             <a class="comment">комментировать</a>
+                        {% endif %}
+                        {% if msg.comments.all %}
+                            <p class="show-content">Показать все комментарии</p>
+                        {% else %}
+                            <p class="no-comments">Тут пока нету комментариев</p>
                         {% endif %}
                     </div><!-- Блок сообщения, без комментариев -->
                     <div class="all-comments">
@@ -76,11 +81,17 @@
                                 </div><!-- Контейнер для каждого комментария, включая дочерние -->
                             {% endfor %}
                         {% else %}
-                            <p class="void-class">Тут пока нет комментариев</p>
+                            <p class="void-class special">Тут пока нет комментариев</p>
                         {% endif %}
                     </div><!-- Контейнер для всех комментариев к сообщению -->
                 </div><!-- Контейнер сообщения, включая его комментарии -->
             {% endfor %}
         </div><!-- Контейнер для всех сообщений -->
+        {% if page_obj.has_next %}
+            <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+        {% endif %}
+        <div class="loading" style="display: none;">
+            <p>Loading...</p>
+        </div>
     </div>
 {% endblock content %}

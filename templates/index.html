@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>
+    <div>
         {% if user and not user.is_anonymous %}
-            <a href="{% url 'wall:logout' %}">logout</a> {{ user.username }}
+            <div class="login">
+                <a href="{% url 'wall:logout' %}" class="btn btn-default">logout</a>
+                <p>{{ user.username }}<a href="{% url 'wall:msg-wall' %}">стена сообщений</a></p>
+            </div>
         {% else %}
-            <a href="{% url 'social:begin' 'google-oauth2' %}">Google+</a>
+            <div class="login">
+                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-default">Google+</a>
+                <p>Для добавления и комментирования сообщений выполните вход</p>
+            </div>
         {% endif %}
-    </p>
+    </div>
 
 {% endblock %}

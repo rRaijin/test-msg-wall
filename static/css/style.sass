@@ -3,6 +3,10 @@
 @import "../libs/normalize"
 
 /***************COLORS*************/
+$body-bgc: #a3aaf9
+$msg-container-bgc: #e4ece2
+$global-black: #000
+$global-white: #fff
 $login-div-bgc: #FAEBD7 /**/
 $login-a-bgc: #94a6f7
 $login-a-color: #fff
@@ -20,16 +24,49 @@ $msg-first-letter: #5fd82f
 $msg-author-color: #7165d2
 $date-color: #7c8790
 $comment-color: #360ada
+$show-content-c: #39bd44
+
+html, body
+  background-color: $body-bgc
 
 
 .container
   margin-top: 20px
 
+
 .message-container
-  background-color: #e4ece2
+  background-color: $msg-container-bgc
+
 
 a:hover
   text-decoration: none
+
+/******Стили для ссылки отображения/скрытия комментариев
+.show-content, .no-comments
+  font-size: 12px
+  margin: 5px 0 0
+  text-align: center
+
+
+.show-content
+  color: $show-content-c
+
+  &:hover
+    cursor: pointer
+
+
+.no-comments
+  color: $global-black
+
+/***************************
+footer
+  background-color: $global-black
+  bottom: 0
+  color: $global-white
+  height: 25px
+  position: fixed
+  width: 100%
+
 
 /*******Стили для блока логина
 .login
@@ -55,6 +92,7 @@ a:hover
     font-size: 16px
     text-align: center
     margin-top: 5px
+
 
 /*********Стили для формы добавления и редактирования сообщений
 .message_form, .edit_message_form
@@ -83,18 +121,22 @@ a:hover
     height: 45px
     margin: 25px 20px 0 0
 
+
 .edit_message_form
   background-color: $msg-form-edit-bgc
+  max-width: 600px
   width: 100%
 
   p
     width: 70%
+
 
 /*******Стили для формы добавления/редактирования комментариев
 .comment_form, .add_comment_form
   background-color: $com-form-bgc
   border: 1px solid
   display: block
+  max-width: 500px
 
   .comment_text
     display: inline-block
@@ -112,12 +154,14 @@ a:hover
     width: 18%
     margin-left: 1%
 
+
 /********Контейнер для сообщения, включая комментарии
 .message-wrapper
   margin: 10px 0
   overflow: hidden
   padding: 10px
   position: relative
+
 
 /********Контейнер для комментария
 .comment-wrapper
@@ -141,6 +185,7 @@ a:hover
     border: none
     color: $edit-link-active-color
 
+
 /*********Сам блок сообщения
 .message-body
   background-color: $msg-body-bgc
@@ -148,6 +193,7 @@ a:hover
   float: left
   margin-bottom: 10px
   padding: 10px
+
 
 /*********Текст сообщения/комментария
 .msg-body, .comment-text
@@ -163,6 +209,7 @@ a:hover
     font-size: 30px
     text-transform: uppercase
 
+
 /*********Автор
 .message-author, .comment-author
   color: $msg-author-color
@@ -174,9 +221,11 @@ a:hover
   &:first-letter
     text-transform: uppercase
 
+
 .message-date, .comment-date
   color: $date-color
   font-size: 14px
+
 
 .comment, .reply
   cursor: pointer
@@ -187,13 +236,26 @@ a:hover
   &:hover
     color: $edit-link-color
 
+
 /********Контейнер комментария, вместе с вложенными комментариями
 .comment_div
   border-radius: 5px
   display: block
 
+
 /********Вложенные комментарии
 .all-comments
   clear: both
-  display: block
+  display: none
   margin-left: 30px
+
+
+/*******класс для отображения скрытых блоков комментариев
+.special
+  display: block
+
+
+/*******Лоадер
+.loading
+  p
+    text-align: center

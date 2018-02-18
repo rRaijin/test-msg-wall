@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+    /*Скрываю/показываю комментарии*/
+    $(document).on('click', '.show-content', function () {
+        $(this).parent().next().toggleClass('special');
+        $(this).parent().next().children().find('.all-comments').toggleClass('special');
+    });
+
     /*Скрипт добавления сообщения на стену*/
     $('.message_form').on('submit', function (e) {
         e.preventDefault();
@@ -12,8 +18,8 @@ $(document).ready(function () {
                     "<p class='msg-body'>" + data.body + "</p>" + "Сообщение опубликовано" +
                     "<span class='message-author'>" + data.author + "</span>" +
                     "<span class='message-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
-                    "<a class='reply'>комментировать</a>" +
-                    "</div>" + "<div class='all-comments'></div>" +
+                    "<a class='reply'>комментировать</a>" + "<p class='show-content'>Показать все комментарии</p>" +
+                    "</div>" + "<div class='all-comments special'></div>" +
                 "</div>"
             );
         });
@@ -46,8 +52,8 @@ $(document).ready(function () {
                     "<p class='msg-body'>" + data.body + "</p>" + "Сообщение отредактировано" +
                     "<span class='message-author'>" + data.author + "</span>" +
                     "<span class='message-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
-                    "<a class='reply'>комментировать</a>" +
-                    "</div>" + "<div class='all-comments'></div>"
+                    "<a class='reply'>комментировать</a>" + "<p class='show-content'>Показать все комментарии</p>" +
+                    "</div>"
                 );
                 $('.void-class').remove();
                 form.remove();/*Удаляю форму*/
@@ -80,9 +86,9 @@ $(document).ready(function () {
                     "<span class='comment-author'>" + data.author + "</span>" +
                     "<span class='comment-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
                     "<a class='reply'>комментировать</a>"+
-                    "</div>" + "<div class='all-comments'>" + "</div>" +
+                    "</div>" + "<div class='all-comments special'>" + "</div>" +
                     "</div>"
-                );
+                ).addClass('special');
                 $('.void-class').remove();
                 form.remove();/*Удаляю форму*/
             });
@@ -117,7 +123,7 @@ $(document).ready(function () {
                     "<span class='comment-date'"+"data-url='"+data.create_url+"'"+">" + data.date + "</span>" +
                     "<a class='reply'>комментировать</a>"+
                     "</div>"
-                );
+                ).addClass('special');
                 $('.void-class').remove();
                 form.remove();/*Удаляю форму*/
             });

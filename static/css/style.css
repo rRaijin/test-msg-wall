@@ -220,6 +220,9 @@ template {
   display: none; }
 
 /***************COLORS************ */
+html, body {
+  background-color: #a3aaf9; }
+
 .container {
   margin-top: 20px; }
 
@@ -228,6 +231,29 @@ template {
 
 a:hover {
   text-decoration: none; }
+
+/******╨б╤В╨╕╨╗╨╕ ╨┤╨╗╤П ╤Б╤Б╤Л╨╗╨║╨╕ ╨╛╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╤П/╤Б╨║╤А╤Л╤В╨╕╤П ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╨╡╨▓ */
+.show-content, .no-comments {
+  font-size: 12px;
+  margin: 5px 0 0;
+  text-align: center; }
+
+.show-content {
+  color: #39bd44; }
+  .show-content:hover {
+    cursor: pointer; }
+
+.no-comments {
+  color: #000; }
+
+/*************************** */
+footer {
+  background-color: #000;
+  bottom: 0;
+  color: #fff;
+  height: 25px;
+  position: fixed;
+  width: 100%; }
 
 /*******╨б╤В╨╕╨╗╨╕ ╨┤╨╗╤П ╨▒╨╗╨╛╨║╨░ ╨╗╨╛╨│╨╕╨╜╨░ */
 .login {
@@ -277,6 +303,7 @@ a:hover {
 
 .edit_message_form {
   background-color: #f3baef;
+  max-width: 600px;
   width: 100%; }
   .edit_message_form p {
     width: 70%; }
@@ -285,7 +312,8 @@ a:hover {
 .comment_form, .add_comment_form {
   background-color: #C5FFB4;
   border: 1px solid;
-  display: block; }
+  display: block;
+  max-width: 500px; }
   .comment_form .comment_text, .add_comment_form .comment_text {
     display: inline-block;
     margin: 0;
@@ -376,7 +404,15 @@ a:hover {
 /********╨Т╨╗╨╛╨╢╨╡╨╜╨╜╤Л╨╡ ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╨╕ */
 .all-comments {
   clear: both;
-  display: block;
+  display: none;
   margin-left: 30px; }
+
+/*******╨║╨╗╨░╤Б╤Б ╨┤╨╗╤П ╨╛╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╤П ╤Б╨║╤А╤Л╤В╤Л╤Е ╨▒╨╗╨╛╨║╨╛╨▓ ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╨╡╨▓ */
+.special {
+  display: block; }
+
+/*******╨Ы╨╛╨░╨┤╨╡╤А */
+.loading p {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

@@ -21,7 +21,7 @@
                 <a class="reply">комментировать</a>
             {% endif %}
         </div>
-        <div class="all-comments">
+        <div class="all-comments special">
             {% if comment.children.all %}
                 {% include 'wall/comment.html' with comments=comment.children.all %}
             {% endif %}
