@@ -1,6 +1,6 @@
 Установить окружение коммандой:
 
-virtualenv .venv
+`virtualenv --python=python3 .venv`
 
 pip install -r requirements.txt
 
